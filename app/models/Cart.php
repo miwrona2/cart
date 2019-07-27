@@ -1,6 +1,6 @@
 <?php
 
-class Cart
+class Cart extends ModelBase
 {
     /**
      * @var int
