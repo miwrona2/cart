@@ -111,4 +111,16 @@ $di->setShared('session', function () {
     return $session;
 });
 
+$di->setShared('flashSession', function () {
+    $flashSession = new \Phalcon\Flash\Session([
+        'error' => 'alert alert-danger',
+        'success' => 'alert alert-success',
+        'notice' => 'alert alert-info',
+        'warning' => 'alert alert-warning'
+    ]);
+
+    $flashSession->setEscaperService(new Phalcon\Escaper);
+    return $flashSession;
+});
+
 require 'di_services.php';
