@@ -2,6 +2,10 @@
 
 use Phalcon\MVC\Model;
 
+/**
+ * Class ModelBase
+ *  * @method static findFirstById(int $id)
+ */
 class ModelBase extends Model
 {
     public static function find($parameters = null)

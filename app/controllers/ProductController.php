@@ -7,7 +7,9 @@ class ProductController extends Controller
 {
     public function listAction()
     {
-        $products = Product::find();
+        /** @var ProductService $productService */
+        $productService = $this->getDI()->get('ProductService');
+        $products = $productService->getList();
 
         $this->view->products = $products;
         $url = $this->getDI()->get('url');
@@ -31,10 +33,8 @@ class ProductController extends Controller
                     $this->flashSession->success('Product has been added successfully!');
                     $this->response->redirect('product/list');
                 } catch (\Exception $e) {
-                    $e->getMessage();
-                    foreach ($e->getMessage() as $message) {
-                        $this->flashSession->error($message);
-                    }
+                    $this->flashSession->error($e->getMessage());
+
                 }
             }
 
@@ -42,6 +42,22 @@ class ProductController extends Controller
         $url = $this->getDI()->get('url');
         $this->view->listUrl = $url->get('product/list');
         $this->view->form = $form;
+    }
+
+    public function deleteAction()
+    {
+        if ($this->request->isPost()) {
+            $id = $this->request->getPost('id', 'int');
+            /** @var ProductService $productService */
+            $productService = $this->getDI()->get('ProductService');
+            try {
+                $productService->delete($id);
+                $this->flashSession->success('Product has been deleted successfully!');
+            } catch (\Exception $e) {
+                $this->flashSession->error($e->getMessage());
+            }
+        }
+        $this->response->redirect('product/list');
     }
 
 }
