@@ -2,6 +2,7 @@
 
 class CartItem extends ModelBase
 {
+    private const TABLE = 'cart_item';
     /**
      * @var int
      */
@@ -49,5 +50,16 @@ class CartItem extends ModelBase
         return $this;
     }
 
+    public function initialize()
+    {
+        $this->setSource(self::TABLE);
 
+        $this->belongsTo('product_id', Product::class, 'id', [
+            'alias' => 'product',
+            'foreignKey' => [
+                'allowNulls' => false,
+                'message' => 'The company doest not exist'
+            ]
+        ]);
+    }
 }
