@@ -8,10 +8,9 @@ class CartController extends Controller
     {
         /** @var CartService $cartService */
         $cartService = $this->getDI()->get('CartService');
-        $firstCart = $cartService->getFirstCart();
         $url = $this->getDI()->get('url');
 
-        $this->view->cartItems = $firstCart->getCartItems();
+        $this->view->cartItems = $cartService->getItems();
         $this->view->productListUrl = $url->get('product/list');
     }
 

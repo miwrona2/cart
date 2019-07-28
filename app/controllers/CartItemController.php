@@ -25,9 +25,20 @@ class CartItemController extends Controller
         $this->response->redirect('product/list');
     }
 
-    public function removeItemAction()
+    public function deleteItemAction()
     {
-
+        if ($this->request->isPost()) {
+            $id = $this->request->getPost('id', 'int');
+            /** @var CartItemService $cartItemService */
+            $cartItemService = $this->getDI()->get('CartItemService');
+            try {
+                $cartItemService->delete($id);
+                $this->flashSession->success('Product has been deleted from a cart successfully!');
+            } catch (\Exception $e) {
+                $this->flashSession->error($e->getMessage());
+            }
+        }
+        $this->response->redirect('cart/list');
     }
 
 }

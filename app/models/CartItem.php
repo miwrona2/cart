@@ -62,7 +62,7 @@ class CartItem extends ModelBase
             ]
         ]);
 
-        $this->belongsTo('cart_id', Product::class, 'id', [
+        $this->belongsTo('cart_id', Cart::class, 'id', [
             'alias' => 'cart',
             'foreignKey' => [
                 'allowNulls' => false,

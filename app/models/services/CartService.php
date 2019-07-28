@@ -23,4 +23,15 @@ class CartService extends Injectable
         }
         return $cart;
     }
+
+    public function getItems(): array
+    {
+        $items = $this->getFirstCart()->getCartItems();
+        $results = [];
+        foreach ($items as $key => $item) {
+            $results[$key]['entity'] = $item;
+            $results[$key]['deleteForm'] = new DeleteForm($item);
+        }
+        return $results;
+    }
 }

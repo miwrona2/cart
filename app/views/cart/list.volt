@@ -6,8 +6,13 @@
 <a href="{{ productListUrl }}">Products List</a>
 {% for item in cartItems %}
     <p>
-        {{ item.getId() }}
-        {{ item.getProduct().getTitle() }}
+        {{ item['entity'].getId() }}
+        {{ item['entity'].getProduct().getTitle() }}
+
+        {{ form('action': 'cartitem/deleteitem/')}}
+            {{ item['deleteForm'].render('id') }}
+            {{ item['deleteForm'].render('deleteSubmit') }}
+        {{ end_form() }}
     </p>
 
 {% endfor %}

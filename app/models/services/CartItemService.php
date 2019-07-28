@@ -29,4 +29,13 @@ class CartItemService extends Injectable
             throw new \RuntimeException('Product can be added to cart only once!');
         }
     }
+
+    public function delete(?int $id): void
+    {
+        $cartItem = CartItem::findFirstById($id);
+        if (!$cartItem instanceof CartItem) {
+            throw new \Exception('An internal error occured!');
+        }
+        $this->cartItemRepository->delete($cartItem);
+    }
 }
