@@ -58,7 +58,15 @@ class CartItem extends ModelBase
             'alias' => 'product',
             'foreignKey' => [
                 'allowNulls' => false,
-                'message' => 'The company doest not exist'
+                'message' => 'The product does not exist'
+            ]
+        ]);
+
+        $this->belongsTo('cart_id', Product::class, 'id', [
+            'alias' => 'cart',
+            'foreignKey' => [
+                'allowNulls' => false,
+                'message' => 'The cart does not exist'
             ]
         ]);
     }

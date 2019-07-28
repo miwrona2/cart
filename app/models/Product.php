@@ -1,7 +1,10 @@
 <?php
 
+use Phalcon\Mvc\Model\Relation;
+
 class Product extends ModelBase
 {
+    private const TABLE = 'product';
     /**
      * @var int
      */
@@ -67,5 +70,19 @@ class Product extends ModelBase
         return $this;
     }
 
-
+    public function initialize()
+    {
+        $this->setSource(self::TABLE);
+        $this->hasMany(
+            "id",
+            CartItem::class,
+            "product_id",
+            [
+                "alias" => 'cartItems',
+                "foreignKey" => [
+                    "action" => Relation::ACTION_CASCADE,
+                ]
+            ]
+        );
+    }
 }

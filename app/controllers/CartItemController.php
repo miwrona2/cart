@@ -17,7 +17,6 @@ class CartItemController extends Controller
             $cartItemService->addItem($cart, $product_id);
             $this->flashSession->success('Product has been added successfully to a cart!');
         } catch (\RuntimeException $e) {
-            // log error
             $this->flashSession->error($e->getMessage());
         } catch (\Exception $e) {
             // log error
