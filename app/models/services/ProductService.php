@@ -30,4 +30,9 @@ class ProductService extends Injectable
         }
         $this->productRepository->delete($product);
     }
+
+    public function edit(Product $product): void
+    {
+        $this->productRepository->update($product);
+    }
 }

@@ -3,6 +3,7 @@
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Numeric;
 use Phalcon\Forms\Element\Submit;
+use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Numericality;
@@ -11,6 +12,12 @@ class ProductForm extends Form
 {
     public function initialize(Product $entity = null, $options = [])
     {
+
+        if (isset($options["edit"])) {
+            $this->add(new Hidden('id'));
+//            $this->add(new Hidden('cart_id'));
+        }
+
         $title = new Text('title');
         $title->setLabel('Title');
         $title->setFilters(['string']);
