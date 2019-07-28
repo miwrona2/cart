@@ -14,6 +14,8 @@
         {{ end_form() }}
 
         <a href="{{ editUrl }}/{{ product['entity'].getId() }}">Edit</a>
+
+        <a href="{{ addToCartUrl }}/{{ product['entity'].getId() }}">Add to cart</a>
     </p>
 
 {% endfor %}

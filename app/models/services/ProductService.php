@@ -26,7 +26,7 @@ class ProductService extends Injectable
     {
         $product = Product::findFirstById($id);
         if (!$product instanceof Product) {
-            throw new \Exception('Internal error occured');
+            throw new \Exception('An internal error occured!');
         }
         $this->productRepository->delete($product);
     }

@@ -16,7 +16,7 @@ class DeleteForm extends Form
 
         $id = new Hidden('id');
         $id->addValidators([
-            new PresenceOf(['message' => 'An internal error occured']),
+            new PresenceOf(['message' => 'An internal error occured!']),
         ]);
         $this->add($id);
 

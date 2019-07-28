@@ -1,7 +1,6 @@
 <?php
 
 use Phalcon\Mvc\Controller;
-use Phalcon\Mvc\Model\Query;
 
 class ProductController extends Controller
 {
@@ -15,6 +14,7 @@ class ProductController extends Controller
         $url = $this->getDI()->get('url');
         $this->view->addUrl = $url->get('product/add');
         $this->view->editUrl = $url->get('product/edit');
+        $this->view->addToCartUrl = $url->get('cartitem/additem');
     }
 
     public function addAction()

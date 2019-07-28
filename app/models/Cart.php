@@ -7,9 +7,9 @@ class Cart extends ModelBase
      */
     private $id;
     /**
-     * @var int
+     * @var string
      */
-    private $product_id;
+    private $name;
 
 
     public function getId(): int
@@ -23,14 +23,14 @@ class Cart extends ModelBase
         return $this;
     }
 
-    public function getProductId(): int
+    public function getName(): string
     {
-        return $this->product_id;
+        return $this->name;
     }
 
-    public function setProductId(int $product_id): Cart
+    public function setName(string $name): Cart
     {
-        $this->product_id = $product_id;
+        $this->name = $name;
         return $this;
     }
 
