@@ -7,7 +7,10 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        return 'cart';
+        $url = $this->getDI()->get('url');
+
+        $this->view->productListUrl = $url->get('product/list');
+        $this->view->cartUrl = $url->get('cart/list');
     }
 
 }
