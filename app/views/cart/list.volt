@@ -18,7 +18,7 @@
                 {{ item['entity'].getProduct().getTitle() }}
             </td>
             <td>
-                {{ form('action': 'cartitem/deleteitem/')}}
+                {{ form('action': 'cart-item/deleteitem/')}}
                     {{ item['deleteForm'].render('id') }}
                     {{ item['deleteForm'].render('deleteSubmit') }}
                 {{ end_form() }}

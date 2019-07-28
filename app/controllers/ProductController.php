@@ -14,7 +14,7 @@ class ProductController extends Controller
         $url = $this->getDI()->get('url');
         $this->view->addUrl = $url->get('product/add');
         $this->view->editUrl = $url->get('product/edit');
-        $this->view->addToCartUrl = $url->get('cartitem/additem');
+        $this->view->addToCartUrl = $url->get('cart-item/additem');
         $this->view->cartUrl = $url->get('cart/list');
     }
 
