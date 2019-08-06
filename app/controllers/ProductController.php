@@ -3,13 +3,14 @@ namespace App\Controllers;
 
 use App\Forms\ProductForm;
 use App\Models\Product;
+use App\Models\Services\ProductService;
 use Phalcon\Mvc\Controller;
 
 class ProductController extends Controller
 {
     public function listAction()
     {
-        /** @var \ProductService $productService */
+        /** @var ProductService $productService */
         $productService = $this->getDI()->get('ProductService');
         $products = $productService->getList();
 
@@ -52,7 +53,7 @@ class ProductController extends Controller
     {
         if ($this->request->isPost()) {
             $id = $this->request->getPost('id', 'int');
-            /** @var \ProductService $productService */
+            /** @var ProductService $productService */
             $productService = $this->getDI()->get('ProductService');
             try {
                 $productService->delete($id);
@@ -75,7 +76,7 @@ class ProductController extends Controller
                 $messages = $form->getMessages();
                 $this->flashSession->error($messages[0]);
             } else {
-                /** @var \ProductService $productService */
+                /** @var ProductService $productService */
                 $productService = $this->getDI()->get('ProductService');
                 try {
                     $productService->edit($product);

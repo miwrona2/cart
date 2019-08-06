@@ -1,4 +1,5 @@
 <?php
+namespace App\Models\Repositories;
 
 use Phalcon\DI\Injectable;
 use Phalcon\MVC\Model;

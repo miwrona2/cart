@@ -1,19 +1,19 @@
 <?php
 
 $di->setShared('ProductRepository', [
-    'className' => ProductRepository::class
+    'className' => \App\Models\Repositories\ProductRepository::class
 ]);
 
 $di->setShared('CartRepository', [
-    'className' => CartRepository::class
+    'className' => \App\Models\Repositories\CartRepository::class
 ]);
 
 $di->setShared('CartItemRepository', [
-    'className' => CartItemRepository::class
+    'className' => \App\Models\Repositories\CartItemRepository::class
 ]);
 
 $di->setShared('ProductService', [
-    'className' => ProductService::class,
+    'className' => \App\Models\Services\ProductService::class,
     'arguments' => [
         [
             'type' => 'service',
@@ -23,7 +23,7 @@ $di->setShared('ProductService', [
 ]);
 
 $di->setShared('CartService', [
-    'className' => CartService::class,
+    'className' => \App\Models\Services\CartService::class,
     'arguments' => [
         [
             'type' => 'service',
@@ -33,7 +33,7 @@ $di->setShared('CartService', [
 ]);
 
 $di->setShared('CartService', [
-    'className' => CartService::class,
+    'className' => \App\Models\Services\CartService::class,
     'arguments' => [
         [
             'type' => 'service',
@@ -43,7 +43,7 @@ $di->setShared('CartService', [
 ]);
 
 $di->setShared('CartItemService', [
-    'className' => CartItemService::class,
+    'className' => \App\Models\Services\CartItemService::class,
     'arguments' => [
         [
             'type' => 'service',

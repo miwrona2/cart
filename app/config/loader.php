@@ -7,6 +7,8 @@ $loader->registerNamespaces(
         'App\Controllers' =>  '../app/controllers/',
         'App\Forms' =>  '../app/forms/',
         'App\Models' =>  '../app/models/',
+        'App\Models\Services' =>  '../app/models/services/',
+        'App\Models\Repositories' =>  '../app/models/repositories/',
     ]
 );
 
