@@ -1,4 +1,5 @@
 <?php
+namespace App\Forms;
 
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Numeric;

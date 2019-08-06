@@ -5,6 +5,7 @@ $loader = new \Phalcon\Loader();
 $loader->registerNamespaces(
     [
         'App\Controllers' =>  '../app/controllers/',
+        'App\Forms' =>  '../app/forms/',
     ]
 );
 

@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
+use App\Forms\ProductForm;
 
 class ProductController extends Controller
 {
@@ -21,7 +22,7 @@ class ProductController extends Controller
 
     public function addAction()
     {
-        $form = new \ProductForm();
+        $form = new ProductForm();
         if ($this->request->isPost()) {
             if (!$form->isValid($this->request->getPost())) {
                 $messages = $form->getMessages();
@@ -66,7 +67,7 @@ class ProductController extends Controller
     {
         $id = $this->filter->sanitize($id, 'int');
         $product = \Product::findFirstById($id);
-        $form = new \ProductForm($product,["edit" => true,]);
+        $form = new ProductForm($product,["edit" => true,]);
 
         if ($this->request->isPost()) {
             if(!$form->isValid($this->request->getPost())) {
