@@ -1,4 +1,5 @@
 <?php
+namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
 
@@ -6,10 +7,10 @@ class CartItemController extends Controller
 {
     public function addItemAction($product_id)
     {
-        /** @var CartService $cartService */
+        /** @var \CartService $cartService */
         $cartService = $this->getDI()->get('CartService');
 
-        /** @var CartItemService $cartItemService */
+        /** @var \CartItemService $cartItemService */
         $cartItemService = $this->getDI()->get('CartItemService');
 
         try {
@@ -29,7 +30,7 @@ class CartItemController extends Controller
     {
         if ($this->request->isPost()) {
             $id = $this->request->getPost('id', 'int');
-            /** @var CartItemService $cartItemService */
+            /** @var \CartItemService $cartItemService */
             $cartItemService = $this->getDI()->get('CartItemService');
             try {
                 $cartItemService->delete($id);

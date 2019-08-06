@@ -1,4 +1,5 @@
 <?php
+namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
 
@@ -6,7 +7,7 @@ class CartController extends Controller
 {
     public function listAction()
     {
-        /** @var CartService $cartService */
+        /** @var \CartService $cartService */
         $cartService = $this->getDI()->get('CartService');
         $url = $this->getDI()->get('url');
 
