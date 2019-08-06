@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "phalcon/ide-stubs": "^3.4"
+    },
+    "require": {
+        "league/tactician": "^1.0"
     }
 }

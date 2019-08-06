@@ -34,6 +34,8 @@ try {
      */
     include APP_PATH . '/config/loader.php';
 
+    include APP_PATH . './../vendor/autoload.php';
+
     /**
      * Handle the request
      */

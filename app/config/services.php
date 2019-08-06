@@ -7,6 +7,7 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
+use League\Tactician\Setup\QuickStart as QS;
 
 /**
  * Shared configuration service
@@ -121,6 +122,14 @@ $di->setShared('flashSession', function () {
 
     $flashSession->setEscaperService(new Phalcon\Escaper);
     return $flashSession;
+});
+
+$di->setShared('commandBus', function () {
+    return QS::create(
+        [
+            AddNewProduct::class => new AddNewProductHandler(),
+        ]
+    );
 });
 
 require 'di_services.php';

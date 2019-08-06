@@ -4,6 +4,14 @@ use Phalcon\Mvc\Controller;
 
 class ProductController extends Controller
 {
+    /** @var \League\Tactician\CommandBus */
+    private $commandBus;
+
+    public function initialize()
+    {
+        $this->commandBus = $this->getDI()->get('commandBus');
+    }
+
     public function listAction()
     {
         /** @var ProductService $productService */
@@ -31,7 +39,8 @@ class ProductController extends Controller
                 /** @var ProductRepository $productRepository */
                 $productRepository = $this->getDI()->get('ProductRepository');
                 try {
-                    $productRepository->create($product);
+                    $command = new AddNewProduct('manual title', 123);
+                    $this->commandBus->handle($command);
                     $this->flashSession->success('Product has been added successfully!');
                     $this->response->redirect('product/list');
                 } catch (\Exception $e) {
