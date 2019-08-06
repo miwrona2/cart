@@ -1,8 +1,9 @@
 <?php
 namespace App\Controllers;
 
-use Phalcon\Mvc\Controller;
 use App\Forms\ProductForm;
+use App\Models\Product;
+use Phalcon\Mvc\Controller;
 
 class ProductController extends Controller
 {
@@ -66,7 +67,7 @@ class ProductController extends Controller
     public function editAction($id)
     {
         $id = $this->filter->sanitize($id, 'int');
-        $product = \Product::findFirstById($id);
+        $product = Product::findFirstById($id);
         $form = new ProductForm($product,["edit" => true,]);
 
         if ($this->request->isPost()) {

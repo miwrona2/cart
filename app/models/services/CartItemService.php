@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Cart;
+use App\Models\CartItem;
 use Phalcon\DI\Injectable;
 
 class CartItemService extends Injectable

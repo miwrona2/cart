@@ -1,7 +1,8 @@
 <?php
 
-use Phalcon\DI\Injectable;
 use App\Forms\DeleteForm;
+use App\Models\Cart;
+use Phalcon\DI\Injectable;
 
 class CartService extends Injectable
 {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CartItem;
 use Phalcon\Mvc\Model\Resultset;
 
 class CartItemRepository extends BaseRepository
