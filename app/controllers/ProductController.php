@@ -4,15 +4,17 @@ namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Forms\ProductForm;
 use App\Models\Product;
+use App\System\CommandBus;
+use App\System\Commands\AddNewProduct;
 
 class ProductController extends Controller
 {
-    /** @var \CommandBus */
+    /** @var CommandBus */
     private $commandBus;
 
     public function initialize()
     {
-        $this->commandBus = new \CommandBus();
+        $this->commandBus = new CommandBus();
     }
 
     public function listAction()
@@ -39,7 +41,7 @@ class ProductController extends Controller
                 $this->flashSession->error($messages[0]);
             } else {
                 try {
-                    $command = new \AddNewProduct($requestData['title'], $requestData['price']);
+                    $command = new AddNewProduct($requestData['title'], $requestData['price']);
                     $this->commandBus->handle($command);
                     $this->flashSession->success('Product has been added successfully!');
                     $this->response->redirect('product/list');

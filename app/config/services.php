@@ -141,7 +141,7 @@ $di->setShared('flashSession', function () {
 $di->setShared('commandBus', function () {
     return QS::create(
         [
-            AddNewProduct::class => $this->get('AddNewProductHandler'),
+            \App\System\Commands\AddNewProduct::class => $this->get('AddNewProductHandler'),
         ]
     );
 });

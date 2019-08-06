@@ -2,12 +2,12 @@
 namespace App\Forms;
 
 use Phalcon\Forms\Element\Text;
-use Phalcon\Forms\Element\Numeric;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Numericality;
+use App\Models\Product;
 
 class ProductForm extends Form
 {
@@ -16,7 +16,6 @@ class ProductForm extends Form
 
         if (isset($options["edit"])) {
             $this->add(new Hidden('id'));
-//            $this->add(new Hidden('cart_id'));
         }
 
         $title = new Text('title');

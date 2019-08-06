@@ -1,5 +1,5 @@
 <?php
-
+namespace App\System\Commands;
 
 class AddNewProduct
 {

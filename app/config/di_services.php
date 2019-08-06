@@ -53,7 +53,7 @@ $di->setShared('CartItemService', [
 ]);
 
 $di->setShared('AddNewProductHandler', [
-    'className' => AddNewProductHandler::class,
+    'className' => \App\System\Handlers\AddNewProductHandler::class,
     'arguments' => [
         [
             'type' => 'service',

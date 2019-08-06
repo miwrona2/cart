@@ -1,12 +1,14 @@
 <?php
+namespace App\System\Handlers;
 
 use App\Models\Product;
+use App\System\Commands\AddNewProduct;
 
 final class AddNewProductHandler
 {
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(\ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }

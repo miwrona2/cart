@@ -1,4 +1,5 @@
 <?php
+namespace App\System;
 
 use Phalcon\Di\Injectable;
 
