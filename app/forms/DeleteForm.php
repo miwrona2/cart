@@ -1,4 +1,5 @@
 <?php
+namespace App\Forms;
 
 use Phalcon\Forms\Form;
 use Phalcon\Mvc\Model;

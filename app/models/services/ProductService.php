@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\DI\Injectable;
+use App\Forms\DeleteForm;
 
 class ProductService extends Injectable
 {
