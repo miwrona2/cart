@@ -2,6 +2,12 @@
 
 $loader = new \Phalcon\Loader();
 
+$loader->registerNamespaces(
+    [
+        'App\Controllers' =>  '../app/controllers/',
+    ]
+);
+
 /**
  * We're a registering a set of directories taken from the configuration file
  */

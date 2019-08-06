@@ -1,12 +1,12 @@
 <?php
 
+use Phalcon\Flash\Direct as Flash;
+use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
+use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
-use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Flash\Direct as Flash;
 
 /**
  * Shared configuration service
@@ -14,6 +14,19 @@ use Phalcon\Flash\Direct as Flash;
 $di->setShared('config', function () {
     return include APP_PATH . "/config/config.php";
 });
+
+$di->set(
+    'dispatcher',
+    function () {
+        $dispatcher = new Dispatcher();
+
+        $dispatcher->setDefaultNamespace(
+            'App\Controllers'
+        );
+
+        return $dispatcher;
+    }
+);
 
 /**
  * The URL component is used to generate all kind of urls in the application

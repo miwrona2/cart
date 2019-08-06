@@ -1,4 +1,5 @@
 <?php
+namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
 
@@ -6,7 +7,7 @@ class ProductController extends Controller
 {
     public function listAction()
     {
-        /** @var ProductService $productService */
+        /** @var \ProductService $productService */
         $productService = $this->getDI()->get('ProductService');
         $products = $productService->getList();
 
@@ -20,7 +21,7 @@ class ProductController extends Controller
 
     public function addAction()
     {
-        $form = new ProductForm();
+        $form = new \ProductForm();
         if ($this->request->isPost()) {
             if (!$form->isValid($this->request->getPost())) {
                 $messages = $form->getMessages();
@@ -49,7 +50,7 @@ class ProductController extends Controller
     {
         if ($this->request->isPost()) {
             $id = $this->request->getPost('id', 'int');
-            /** @var ProductService $productService */
+            /** @var \ProductService $productService */
             $productService = $this->getDI()->get('ProductService');
             try {
                 $productService->delete($id);
@@ -64,15 +65,15 @@ class ProductController extends Controller
     public function editAction($id)
     {
         $id = $this->filter->sanitize($id, 'int');
-        $product = Product::findFirstById($id);
-        $form = new ProductForm($product,["edit" => true,]);
+        $product = \Product::findFirstById($id);
+        $form = new \ProductForm($product,["edit" => true,]);
 
         if ($this->request->isPost()) {
             if(!$form->isValid($this->request->getPost())) {
                 $messages = $form->getMessages();
                 $this->flashSession->error($messages[0]);
             } else {
-                /** @var ProductService $productService */
+                /** @var \ProductService $productService */
                 $productService = $this->getDI()->get('ProductService');
                 try {
                     $productService->edit($product);
