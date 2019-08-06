@@ -1,5 +1,11 @@
 <?php
 
+use League\Tactician\CommandBus;
+use League\Tactician\Handler\CommandHandlerMiddleware;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use League\Tactician\Handler\Locator\InMemoryLocator;
+use League\Tactician\Handler\MethodNameInflector\HandleInflector;
+use League\Tactician\Plugins\LockingMiddleware;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\Url as UrlResolver;
@@ -66,11 +72,11 @@ $di->setShared('db', function () {
 
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
     $params = [
-        'host'     => $config->database->host,
+        'host' => $config->database->host,
         'username' => $config->database->username,
         'password' => $config->database->password,
-        'dbname'   => $config->database->dbname,
-        'charset'  => $config->database->charset
+        'dbname' => $config->database->dbname,
+        'charset' => $config->database->charset
     ];
 
     if ($config->database->adapter == 'Postgresql') {
@@ -95,9 +101,9 @@ $di->setShared('modelsMetadata', function () {
  */
 $di->set('flash', function () {
     return new Flash([
-        'error'   => 'alert alert-danger',
+        'error' => 'alert alert-danger',
         'success' => 'alert alert-success',
-        'notice'  => 'alert alert-info',
+        'notice' => 'alert alert-info',
         'warning' => 'alert alert-warning'
     ]);
 });
@@ -125,10 +131,9 @@ $di->setShared('flashSession', function () {
 });
 
 $di->setShared('commandBus', function () {
-    $productRepository = new ProductRepository();
     return QS::create(
         [
-            AddNewProduct::class => new AddNewProductHandler($productRepository),
+            AddNewProduct::class => $this->get('AddNewProductHandler'),
         ]
     );
 });
