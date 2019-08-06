@@ -7,7 +7,7 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
-use League\Tactician\Setup\QuickStart as QS;
+use League\Tactician\Setup\QuickStart as CommandBus;
 use Phalcon\Mvc\Dispatcher;
 
 /**
@@ -139,9 +139,10 @@ $di->setShared('flashSession', function () {
 });
 
 $di->setShared('commandBus', function () {
-    return QS::create(
+    return CommandBus::create(
         [
             \App\System\Commands\AddNewProduct::class => $this->get('AddNewProductHandler'),
+            \App\System\Commands\DeleteProduct::class => $this->get('DeleteProductHandler'),
         ]
     );
 });

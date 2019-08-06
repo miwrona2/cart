@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\System\Commands\DeleteProduct;
 use Phalcon\Mvc\Controller;
 use App\Forms\ProductForm;
 use App\Models\Product;
@@ -41,8 +42,8 @@ class ProductController extends Controller
                 $messages = $form->getMessages();
                 $this->flashSession->error($messages[0]);
             } else {
-                try {
                     $command = new AddNewProduct($requestData['title'], $requestData['price']);
+                try {
                     $this->commandBus->handle($command);
                     $this->flashSession->success('Product has been added successfully!');
                     $this->response->redirect('product/list');
@@ -61,10 +62,9 @@ class ProductController extends Controller
     {
         if ($this->request->isPost()) {
             $id = $this->request->getPost('id', 'int');
-            /** @var ProductService $productService */
-            $productService = $this->getDI()->get('ProductService');
+            $command = new DeleteProduct($id);
             try {
-                $productService->delete($id);
+                $this->commandBus->handle($command);
                 $this->flashSession->success('Product has been deleted successfully!');
             } catch (\Exception $e) {
                 $this->flashSession->error($e->getMessage());
@@ -77,7 +77,7 @@ class ProductController extends Controller
     {
         $id = $this->filter->sanitize($id, 'int');
         $product = Product::findFirstById($id);
-        $form = new ProductForm($product,["edit" => true,]);
+        $form = new ProductForm($product, ["edit" => true,]);
 
         if ($this->request->isPost()) {
             if(!$form->isValid($this->request->getPost())) {

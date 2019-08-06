@@ -61,3 +61,14 @@ $di->setShared('AddNewProductHandler', [
         ],
     ]
 ]);
+
+$di->setShared('DeleteProductHandler', [
+    'className' => \App\System\Handlers\DeleteProductHandler::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'name' => 'ProductRepository',
+        ],
+    ]
+]);
+
