@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 
 final class AddNewProductHandler
 {
@@ -12,7 +13,7 @@ final class AddNewProductHandler
 
     public function handle(AddNewProduct $command) : void
     {
-        $product = new \Product();
+        $product = new Product();
         $product->setTitle($command->getTitle());
         $product->setPrice($command->getPrice());
 

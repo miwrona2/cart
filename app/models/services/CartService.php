@@ -2,6 +2,7 @@
 
 use Phalcon\DI\Injectable;
 use App\Forms\DeleteForm;
+use App\Models\Cart;
 
 class CartService extends Injectable
 {
