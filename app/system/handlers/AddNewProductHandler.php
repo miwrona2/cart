@@ -3,12 +3,13 @@ namespace App\System\Handlers;
 
 use App\Models\Product;
 use App\System\Commands\AddNewProduct;
+use App\Models\Repositories\ProductRepository;
 
 final class AddNewProductHandler
 {
     private $productRepository;
 
-    public function __construct(\ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }

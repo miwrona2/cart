@@ -1,8 +1,10 @@
 <?php
+namespace App\Models\Services;
 
 use Phalcon\DI\Injectable;
 use App\Forms\DeleteForm;
 use App\Models\Product;
+use App\Models\Repositories\ProductRepository;
 
 class ProductService extends Injectable
 {

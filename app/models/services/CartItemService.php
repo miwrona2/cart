@@ -1,8 +1,10 @@
 <?php
+namespace App\Models\Services;
 
 use Phalcon\DI\Injectable;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Repositories\CartItemRepository;
 
 class CartItemService extends Injectable
 {

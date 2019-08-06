@@ -1,4 +1,5 @@
 <?php
+namespace App\Models\Repositories;
 
 use Phalcon\Mvc\Model\Resultset;
 use App\Models\CartItem;
