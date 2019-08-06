@@ -4,12 +4,12 @@ use Phalcon\Mvc\Controller;
 
 class ProductController extends Controller
 {
-    /** @var \League\Tactician\CommandBus */
+    /** @var CommandBus */
     private $commandBus;
 
     public function initialize()
     {
-        $this->commandBus = $this->getDI()->get('commandBus');
+        $this->commandBus = new CommandBus();
     }
 
     public function listAction()
@@ -30,16 +30,13 @@ class ProductController extends Controller
     {
         $form = new ProductForm();
         if ($this->request->isPost()) {
-            if (!$form->isValid($this->request->getPost())) {
+            $requestData = $this->request->getPost();
+            if (!$form->isValid($requestData)) {
                 $messages = $form->getMessages();
                 $this->flashSession->error($messages[0]);
             } else {
-                $product = new Product();
-                $form->bind($this->request->getPost(), $product);
-                /** @var ProductRepository $productRepository */
-                $productRepository = $this->getDI()->get('ProductRepository');
                 try {
-                    $command = new AddNewProduct('manual title', 123);
+                    $command = new AddNewProduct($requestData['title'], $requestData['price']);
                     $this->commandBus->handle($command);
                     $this->flashSession->success('Product has been added successfully!');
                     $this->response->redirect('product/list');

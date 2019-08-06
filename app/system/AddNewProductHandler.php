@@ -3,9 +3,11 @@
 
 final class AddNewProductHandler
 {
+    private $productRepository;
 
-    public function __construct()
+    public function __construct(ProductRepository $productRepository)
     {
+        $this->productRepository = $productRepository;
     }
 
     public function handle(AddNewProduct $command) : void
@@ -14,7 +16,6 @@ final class AddNewProductHandler
         $product->setTitle($command->getTitle());
         $product->setPrice($command->getPrice());
 
-        $productRepository = new ProductRepository();
-        $productRepository->create($product);
+        $this->productRepository->create($product);
     }
 }

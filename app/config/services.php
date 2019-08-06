@@ -125,9 +125,10 @@ $di->setShared('flashSession', function () {
 });
 
 $di->setShared('commandBus', function () {
+    $productRepository = new ProductRepository();
     return QS::create(
         [
-            AddNewProduct::class => new AddNewProductHandler(),
+            AddNewProduct::class => new AddNewProductHandler($productRepository),
         ]
     );
 });
