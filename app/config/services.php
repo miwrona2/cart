@@ -1,14 +1,14 @@
 <?php
 
+use League\Tactician\Setup\QuickStart as CommandBus;
+use Phalcon\Flash\Direct as Flash;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
+use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
-use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Flash\Direct as Flash;
-use League\Tactician\Setup\QuickStart as CommandBus;
-use Phalcon\Mvc\Dispatcher;
 
 /**
  * Shared configuration service
@@ -148,6 +148,7 @@ $di->setShared('commandBus', function () {
             \App\System\Commands\DeleteProduct::class => $this->get('DeleteProductHandler'),
             \App\System\Commands\EditProduct::class => $this->get('EditProductHandler'),
             \App\System\Commands\AddItem::class => $this->get('AddItemHandler'),
+            \App\System\Commands\DeleteItem::class => $this->get('DeleteItemHandler'),
         ]
     );
 });

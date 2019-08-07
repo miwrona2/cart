@@ -90,3 +90,13 @@ $di->setShared('AddItemHandler', [
     ]
 ]);
 
+$di->setShared('DeleteItemHandler', [
+    'className' => \App\System\Handlers\DeleteItemHandler::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'name' => 'CartItemRepository',
+        ],
+    ]
+]);
+

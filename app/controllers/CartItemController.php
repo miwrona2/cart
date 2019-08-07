@@ -1,11 +1,11 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\Services\CartService;
 use App\System\CommandBus;
 use App\System\Commands\AddItem;
+use App\System\Commands\DeleteItem;
 use Phalcon\Mvc\Controller;
-use App\Models\Services\CartService;
-use App\Models\Services\CartItemService;
 
 class CartItemController extends Controller
 {
@@ -40,10 +40,9 @@ class CartItemController extends Controller
     {
         if ($this->request->isPost()) {
             $id = $this->request->getPost('id', 'int');
-            /** @var CartItemService $cartItemService */
-            $cartItemService = $this->getDI()->get('CartItemService');
+            $command = new DeleteItem($id);
             try {
-                $cartItemService->delete($id);
+                $this->commandBus->handle($command);
                 $this->flashSession->success('Product has been deleted from a cart successfully!');
             } catch (\Exception $e) {
                 $this->flashSession->error($e->getMessage());

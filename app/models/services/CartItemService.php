@@ -1,10 +1,8 @@
 <?php
 namespace App\Models\Services;
 
-use Phalcon\DI\Injectable;
-use App\Models\Cart;
-use App\Models\CartItem;
 use App\Models\Repositories\CartItemRepository;
+use Phalcon\DI\Injectable;
 
 class CartItemService extends Injectable
 {
@@ -21,14 +19,5 @@ class CartItemService extends Injectable
         if ($results->count() > 0) {
             throw new \RuntimeException('Product can be added to cart only once!');
         }
-    }
-
-    public function delete(?int $id): void
-    {
-        $cartItem = CartItem::findFirstById($id);
-        if (!$cartItem instanceof CartItem) {
-            throw new \Exception('An internal error occured!');
-        }
-        $this->cartItemRepository->delete($cartItem);
     }
 }
