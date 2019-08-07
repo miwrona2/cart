@@ -143,6 +143,7 @@ $di->setShared('commandBus', function () {
         [
             \App\System\Commands\AddNewProduct::class => $this->get('AddNewProductHandler'),
             \App\System\Commands\DeleteProduct::class => $this->get('DeleteProductHandler'),
+            \App\System\Commands\EditProduct::class => $this->get('EditProductHandler')
         ]
     );
 });

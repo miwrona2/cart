@@ -25,18 +25,4 @@ class ProductService extends Injectable
         }
         return $results;
     }
-
-    public function delete(?int $id): void
-    {
-        $product = Product::findFirstById($id);
-        if (!$product instanceof Product) {
-            throw new \Exception('An internal error occured!');
-        }
-        $this->productRepository->delete($product);
-    }
-
-    public function edit(Product $product): void
-    {
-        $this->productRepository->update($product);
-    }
 }

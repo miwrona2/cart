@@ -1,7 +1,7 @@
 <?php
 namespace App\System\Commands;
 
-class DeleteProduct
+class DeleteProduct implements Command
 {
     private $id;
 

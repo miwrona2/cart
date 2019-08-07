@@ -1,15 +1,20 @@
 <?php
+
 namespace App\System\Commands;
 
-class AddNewProduct implements Command
+use App\Models\Product;
+
+class EditProduct implements Command
 {
     private $title;
     private $price;
+    private $product;
 
-    public function __construct(string $title, float $price)
+    public function __construct(string $title, float $price, Product $product)
     {
         $this->title = $title;
         $this->price = $price;
+        $this->product = $product;
     }
 
     public function getTitle(): string
@@ -20,5 +25,10 @@ class AddNewProduct implements Command
     public function getPrice(): float
     {
         return $this->price;
+    }
+
+    public function getProduct(): Product
+    {
+        return $this->product;
     }
 }

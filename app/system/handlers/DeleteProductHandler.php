@@ -4,9 +4,10 @@ namespace App\System\Handlers;
 
 use App\Models\Product;
 use App\Models\Repositories\ProductRepository;
+use App\System\Commands\Command;
 use App\System\Commands\DeleteProduct;
 
-class DeleteProductHandler
+final class DeleteProductHandler implements Handler
 {
     private $productRepository;
 
@@ -15,8 +16,9 @@ class DeleteProductHandler
         $this->productRepository = $productRepository;
     }
 
-    public function handle(DeleteProduct $command): void
+    public function handle(Command $command): void
     {
+        /** @var DeleteProduct $command */
         $product = Product::findFirstById($command->getId());
         if (!$product instanceof Product) {
             throw new \Exception('An internal error occured!');

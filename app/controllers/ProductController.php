@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\System\Commands\DeleteProduct;
+use App\System\Commands\EditProduct;
 use Phalcon\Mvc\Controller;
 use App\Forms\ProductForm;
 use App\Models\Product;
@@ -80,14 +81,14 @@ class ProductController extends Controller
         $form = new ProductForm($product, ["edit" => true,]);
 
         if ($this->request->isPost()) {
-            if(!$form->isValid($this->request->getPost())) {
+            $requestData = $this->request->getPost();
+            if(!$form->isValid($requestData)) {
                 $messages = $form->getMessages();
                 $this->flashSession->error($messages[0]);
             } else {
-                /** @var ProductService $productService */
-                $productService = $this->getDI()->get('ProductService');
+                $command = new EditProduct($requestData['title'], $requestData['price'], $product);
                 try {
-                    $productService->edit($product);
+                    $this->commandBus->handle($command);
                     $this->flashSession->success('Product has been edited successfully!');
                     $this->response->redirect('product/list');
                 } catch (\Exception $e) {

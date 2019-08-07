@@ -1,12 +1,11 @@
 <?php
 namespace App\System\Handlers;
 
-use App\Models\Product;
-use App\System\Commands\AddNewProduct;
 use App\Models\Repositories\ProductRepository;
 use App\System\Commands\Command;
+use App\System\Commands\EditProduct;
 
-final class AddNewProductHandler implements Handler
+final class EditProductHandler implements Handler
 {
     private $productRepository;
 
@@ -17,11 +16,11 @@ final class AddNewProductHandler implements Handler
 
     public function handle(Command $command) : void
     {
-        /** @var AddNewProduct $command */
-        $product = new Product();
+        /** @var EditProduct $command */
+        $product = $command->getProduct();
         $product->setTitle($command->getTitle());
         $product->setPrice($command->getPrice());
 
-        $this->productRepository->create($product);
+        $this->productRepository->update($product);
     }
 }

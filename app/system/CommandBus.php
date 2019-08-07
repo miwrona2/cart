@@ -1,6 +1,7 @@
 <?php
 namespace App\System;
 
+use App\System\Commands\Command;
 use Phalcon\Di\Injectable;
 
 final class CommandBus extends Injectable
@@ -12,7 +13,7 @@ final class CommandBus extends Injectable
         $this->commandBus = $this->getDI()->get('commandBus');
     }
 
-    public function handle($command) : void
+    public function handle(Command $command) : void
     {
         $this->commandBus->handle($command);
     }
