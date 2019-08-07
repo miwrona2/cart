@@ -14,17 +14,18 @@ class ProductController extends Controller
 {
     /** @var CommandBus */
     private $commandBus;
+    /** @var ProductQuery */
+    private $productQuery;
 
     public function initialize()
     {
         $this->commandBus = new CommandBus();
+        $this->productQuery = $this->getDI()->get('ProductQuery');
     }
 
     public function listAction()
     {
-        /** @var ProductQuery $productQuery */
-        $productQuery = $this->getDI()->get('ProductQuery');
-        $products = $productQuery->getAll();
+        $products = $this->productQuery->getAll();
 
         $this->view->products = $products;
         $url = $this->getDI()->get('url');
