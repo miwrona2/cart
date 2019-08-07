@@ -76,3 +76,17 @@ $di->setShared('ProductQuery', [
     'className' => \App\System\Queries\ProductQuery::class,
 ]);
 
+$di->setShared('AddItemHandler', [
+    'className' => \App\System\Handlers\AddItemHandler::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'name' => 'CartItemService',
+        ],
+        [
+            'type' => 'service',
+            'name' => 'CartItemRepository',
+        ],
+    ]
+]);
+

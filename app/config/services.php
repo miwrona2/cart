@@ -138,12 +138,16 @@ $di->setShared('flashSession', function () {
     return $flashSession;
 });
 
+/**
+ * every Command has assigned exactly one Handler
+ */
 $di->setShared('commandBus', function () {
     return CommandBus::create(
         [
             \App\System\Commands\AddNewProduct::class => $this->get('AddNewProductHandler'),
             \App\System\Commands\DeleteProduct::class => $this->get('DeleteProductHandler'),
-            \App\System\Commands\EditProduct::class => $this->get('EditProductHandler')
+            \App\System\Commands\EditProduct::class => $this->get('EditProductHandler'),
+            \App\System\Commands\AddItem::class => $this->get('AddItemHandler'),
         ]
     );
 });

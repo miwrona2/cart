@@ -1,23 +1,31 @@
 <?php
 namespace App\Controllers;
 
+use App\System\CommandBus;
+use App\System\Commands\AddItem;
 use Phalcon\Mvc\Controller;
 use App\Models\Services\CartService;
 use App\Models\Services\CartItemService;
 
 class CartItemController extends Controller
 {
+    /** @var CommandBus */
+    private $commandBus;
+
+    /** @var CartService */
+    private $cartService;
+    
+    public function initialize()
+    {
+        $this->commandBus = new CommandBus();
+        $this->cartService = $this->getDI()->get('CartService');
+    }
     public function addItemAction($product_id)
     {
-        /** @var CartService $cartService */
-        $cartService = $this->getDI()->get('CartService');
-
-        /** @var CartItemService $cartItemService */
-        $cartItemService = $this->getDI()->get('CartItemService');
-
         try {
-            $cart = $cartService->getFirstCart();
-            $cartItemService->addItem($cart, $product_id);
+            $cart = $this->cartService->getFirstCart();
+            $command = new AddItem($cart, $product_id);
+            $this->commandBus->handle($command);
             $this->flashSession->success('Product has been added successfully to a cart!');
         } catch (\RuntimeException $e) {
             $this->flashSession->error($e->getMessage());
