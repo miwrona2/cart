@@ -100,3 +100,12 @@ $di->setShared('DeleteItemHandler', [
     ]
 ]);
 
+$di->setShared('CartQuery', [
+    'className' => \App\System\Queries\CartQuery::class,
+    'arguments' => [
+        [
+            'type' => 'service',
+            'name' => 'CartService',
+        ],
+    ]
+]);

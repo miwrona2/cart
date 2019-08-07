@@ -1,10 +1,9 @@
 <?php
 namespace App\Models\Services;
 
-use Phalcon\DI\Injectable;
-use App\Forms\DeleteForm;
 use App\Models\Cart;
 use App\Models\Repositories\CartRepository;
+use Phalcon\DI\Injectable;
 
 class CartService extends Injectable
 {
@@ -26,16 +25,5 @@ class CartService extends Injectable
             $this->cartRepository->create($cart);
         }
         return $cart;
-    }
-
-    public function getItems(): array
-    {
-        $items = $this->getFirstCart()->getCartItems();
-        $results = [];
-        foreach ($items as $key => $item) {
-            $results[$key]['entity'] = $item;
-            $results[$key]['deleteForm'] = new DeleteForm($item);
-        }
-        return $results;
     }
 }
