@@ -12,16 +12,6 @@ $di->setShared('CartItemRepository', [
     'className' => \App\Models\Repositories\CartItemRepository::class
 ]);
 
-$di->setShared('ProductService', [
-    'className' => \App\Models\Services\ProductService::class,
-    'arguments' => [
-        [
-            'type' => 'service',
-            'name' => 'ProductRepository',
-        ],
-    ]
-]);
-
 $di->setShared('CartService', [
     'className' => \App\Models\Services\CartService::class,
     'arguments' => [
@@ -80,5 +70,9 @@ $di->setShared('EditProductHandler', [
             'name' => 'ProductRepository',
         ],
     ]
+]);
+
+$di->setShared('ProductQuery', [
+    'className' => \App\System\Queries\ProductQuery::class,
 ]);
 

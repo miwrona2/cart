@@ -3,12 +3,12 @@ namespace App\Controllers;
 
 use App\System\Commands\DeleteProduct;
 use App\System\Commands\EditProduct;
+use App\System\Queries\ProductQuery;
 use Phalcon\Mvc\Controller;
 use App\Forms\ProductForm;
 use App\Models\Product;
 use App\System\CommandBus;
 use App\System\Commands\AddNewProduct;
-use App\Models\Services\ProductService;
 
 class ProductController extends Controller
 {
@@ -22,9 +22,9 @@ class ProductController extends Controller
 
     public function listAction()
     {
-        /** @var ProductService $productService */
-        $productService = $this->getDI()->get('ProductService');
-        $products = $productService->getList();
+        /** @var ProductQuery $productQuery */
+        $productQuery = $this->getDI()->get('ProductQuery');
+        $products = $productQuery->getAll();
 
         $this->view->products = $products;
         $url = $this->getDI()->get('url');

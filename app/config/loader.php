@@ -12,6 +12,7 @@ $loader->registerNamespaces(
         'App\System' =>  '../app/system/',
         'App\System\Commands' =>  '../app/system/commands',
         'App\System\Handlers' =>  '../app/system/handlers',
+        'App\System\Queries' =>  '../app/system/queries',
     ]
 );
 
@@ -29,5 +30,6 @@ $loader->registerDirs(
         $config->application->systemDir,
         $config->application->commandsDir,
         $config->application->handlersDir,
+        $config->application->queriesDir,
     ]
 )->register();
