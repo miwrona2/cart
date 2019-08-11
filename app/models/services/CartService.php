@@ -28,14 +28,21 @@ class CartService extends Injectable
         return $cart;
     }
 
-    public function getItems(): array
+    public function getItems(Cart $cart): array
     {
-        $items = $this->getFirstCart()->getCartItems();
+        $items = $cart->getCartItems();
         $results = [];
         foreach ($items as $key => $item) {
             $results[$key]['entity'] = $item;
             $results[$key]['deleteForm'] = new DeleteForm($item);
         }
         return $results;
+    }
+
+    public function getSaldo(Cart $cart): ?string
+    {
+        return $this->cartRepository->getSaldo($cart->getId())
+            ->getFirst()
+            ->toArray()[0];
     }
 }

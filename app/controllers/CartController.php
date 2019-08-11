@@ -11,9 +11,11 @@ class CartController extends Controller
         /** @var CartService $cartService */
         $cartService = $this->getDI()->get('CartService');
         $url = $this->getDI()->get('url');
+        $firstCart = $cartService->getFirstCart();
 
-        $this->view->cartItems = $cartService->getItems();
+        $this->view->cartItems = $cartService->getItems($firstCart);
         $this->view->productListUrl = $url->get('product/list');
+        $this->view->cartsSaldo = $cartService->getSaldo($cartService->getFirstCart());
     }
 
 }
