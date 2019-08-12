@@ -39,10 +39,9 @@ class CartService extends Injectable
         return $results;
     }
 
-    public function getSaldo(Cart $cart): ?string
+    public function getSaldo(Cart $cart): ?float
     {
-        return $this->cartRepository->getSaldo($cart->getId())
-            ->getFirst()
-            ->toArray()[0];
+        $queryResult =  $this->cartRepository->getSaldo($cart->getId());
+        return (float)$queryResult->toArray()[0];
     }
 }
